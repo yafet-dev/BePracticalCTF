@@ -1,0 +1,16 @@
+#!/bin/bash
+
+website_url="targetIp"
+
+endpoints_file="payload.txt(file)"
+
+
+endpoints=($(cat "$endpoints_file"))
+
+for endpoint in "${endpoints[@]}"; do
+  response=$(curl -s "${website_url}/${endpoint}")
+  if [[ "$response" != "Website's 404 response" ]]; then
+    echo "Response from $website_url/$endpoint:"
+    echo "$response"
+  fi
+done
